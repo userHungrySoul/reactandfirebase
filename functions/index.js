@@ -23,3 +23,19 @@ exports.addMessage = functions.https.onRequest((req, res) => {
 //     return res.redirect(303, snapshot.ref.toString());
 //   });
 });
+
+exports.returnText = functions.https.onRequest((req, res) => {
+    // Grab the text parameter.
+    const original = req.query.text;
+    return original;
+  });
+
+  // Always change the value of "/hello" to "world!"
+exports.hello = functions.database.ref('/hello').onWrite(event => {
+    // set() returns a promise. We keep the function alive by returning it.
+    // return event.data.ref.set('world!').then(() => {
+    //   console.log('Write succeeded!');
+    //   return null;
+    // });
+    res.send("Hello");
+  });
